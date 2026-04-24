@@ -1,0 +1,20 @@
+services:
+  mc-server:
+    build:
+      context: .
+      args:
+        MC_VERSION: ${MC_VERSION:-latest}
+        SERVER_PORT: ${SERVER_PORT:-8888}
+    container_name: mc-server
+    environment:
+      MEMORY: ${MEMORY:-1024M}
+      EULA: ${EULA:-true}
+      SERVER_PORT: ${SERVER_PORT:-8888}
+    ports:
+      - "${SERVER_PORT:-8888}:${SERVER_PORT:-8888}"
+    volumes:
+      - mc_data:/data
+    restart: always
+
+volumes:
+  mc_data:
